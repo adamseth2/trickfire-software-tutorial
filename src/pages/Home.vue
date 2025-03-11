@@ -135,7 +135,7 @@ def main(args: list[str] | None = None) -> None:
 def generate_launch_description() -> launch.LaunchDescription:
     return launch.LaunchDescription(
         [can_moteus_node, drivebase_node, mission_control_updater_node, arm_node, example_node] # <- I added it to the end of the array
-    )
+)
           </code>
         </pre>
                 </li>

@@ -14,7 +14,6 @@ import PowerPlugIcon from 'vue-material-design-icons/PowerPlug.vue';
 import ControllerIcon from 'vue-material-design-icons/ControllerClassic.vue';
 import { useRoslibStore } from '@/store/roslibStore';
 import { useControllerStore } from '@/store/controllerStore';
-import { onMounted } from 'vue';
 
 const roslib = useRoslibStore();
 const controller = useControllerStore();
