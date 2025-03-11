@@ -27,6 +27,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: mission-control
+          name: trickfire-software-tutorial
           path: ./dist
           retention-days: 1
