@@ -11,7 +11,8 @@ import Telemetry from './pages/Telemetry.vue';
 import Settings from './pages/Settings.vue';
 import Help from './pages/Help.vue';
 import { createPinia } from 'pinia';
-
+import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
 const routes = [
   { path: '/', component: Home },
   { path: '/Home', component: Home },
@@ -33,6 +34,15 @@ const router = createRouter({
 const app = createApp(App);
 //Set up Pinia
 const pinia = createPinia();
+app.use(PrimeVue, {
+  // Default theme configuration
+  theme: {
+    preset: Aura,
+    options: {
+      darkModeSelector: '.my-app-dark',
+    },
+  },
+});
 app.use(pinia);
 
 app.use(router).mount('#app');

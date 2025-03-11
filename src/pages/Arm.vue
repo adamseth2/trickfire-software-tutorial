@@ -1,22 +1,7 @@
-<!-- 3D model of the arm, camera arms, Any information related to the arm should be here  -->
-<script setup lang="ts">
-import ArmModeSelection from '../components/arm/ArmModeSelection.vue';
-import ArmModel from '../components/arm/ArmModel.vue';
-</script>
+<script setup lang="ts"></script>
+
 <template>
-  <div class="two-by-three-grid-page">
-    <ArmModeSelection />
-    <Suspense>
-      <ArmModel />
-    </Suspense>
-  </div>
+  <div class="two-by-three-grid-page"></div>
 </template>
 
-<style lang="scss" scoped>
-#arm {
-  height: 100%;
-  width: 100%;
-  grid-column: 2 / span 2;
-  grid-row: 1 / span 2;
-}
-</style>
+<style lang="scss" scoped></style>

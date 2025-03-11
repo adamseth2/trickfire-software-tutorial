@@ -15,10 +15,12 @@
   },
   "dependencies": {
     "@maptiler/sdk": "^2.4.1",
+    "@primeuix/themes": "^1.0.0",
     "@tresjs/cientos": "^4.0.3",
     "@tresjs/core": "^4.3.1",
     "leaflet": "^1.9.4",
     "pinia": "^2.2.5",
+    "primevue": "^4.3.1",
     "roslib": "^1.4.1",
     "three": "^0.170.0",
     "vue": "^3.2.47",

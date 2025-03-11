@@ -14,20 +14,14 @@ import PowerPlugIcon from 'vue-material-design-icons/PowerPlug.vue';
 import ControllerIcon from 'vue-material-design-icons/ControllerClassic.vue';
 import { useRoslibStore } from '@/store/roslibStore';
 import { useControllerStore } from '@/store/controllerStore';
-import { useOperationStateStore } from '../store/operationStateStore';
 import { onMounted } from 'vue';
 
 const roslib = useRoslibStore();
 const controller = useControllerStore();
-const operation = useOperationStateStore();
 const currentTab = ref(0);
 const setCurrentTab = (newValue: number) => {
   currentTab.value = newValue;
 };
-
-onMounted(() => {
-  operation.operationStateSub.start();
-});
 
 type PageIcon = { icon: object; label: string; helperText: string }[];
 
@@ -87,7 +81,7 @@ const pageIconArr: PageIcon = [
   <nav>
     <section id="logo-section">
       <img id="logo" src="../assets/trickfire_logo_transparent.png" alt="Trickfire logo" />
-      <h1 id="logo-text">Mission Control</h1>
+      <h1 id="logo-text">ST</h1>
     </section>
     <section id="page-section">
       <RouterLink
@@ -103,32 +97,6 @@ const pageIconArr: PageIcon = [
       </RouterLink>
     </section>
     <section id="states-section">
-      <div id="operation-selector" class="container">
-        <button
-          id="disable-button"
-          title="Disabled"
-          :class="{ checked: operation.getOperationState() === 'disabled' }"
-          @click="operation.setOperationState({ data: 'disabled' })"
-        >
-          Disable
-        </button>
-        <button
-          id="teleoperation-button"
-          title="TeleOperation"
-          :class="{ checked: operation.getOperationState() === 'teleoperation' }"
-          @click="operation.setOperationState({ data: 'teleoperation' })"
-        >
-          TeleOp
-        </button>
-        <button
-          id="autonomous-button"
-          title="Autonomous"
-          :class="{ checked: operation.getOperationState() === 'autonomous' }"
-          @click="operation.setOperationState({ data: 'autonomous' })"
-        >
-          Auto
-        </button>
-      </div>
       <div
         class="container"
         :title="`Websocket: ${roslib.isWebSocketConnected ? `Connected` : `Disconnected`}`"
