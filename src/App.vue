@@ -5,6 +5,7 @@ import { onBeforeUnmount, onMounted } from 'vue';
 import { gamepadInit } from '@/lib/controller/gamepad';
 import { useFavicon } from '@vueuse/core';
 import { computed } from 'vue';
+
 const rosjs = useRoslibStore();
 
 // All global subscribers & publishers that do not belong in a component put in here.

@@ -10,11 +10,12 @@
   --white: #fafafa;
   --space-purple: #29293d;
 }
+
 *,
 ::before,
 ::after {
-  margin: 0;
-  padding: 0;
+  // margin: 0;
+  // padding: 0;
   // list-style-type: none;
   box-sizing: border-box;
   // text-decoration: none;
@@ -28,10 +29,13 @@
   }
 }
 a {
-  color: inherit;
+  // color: inherit;
 }
 html,
 body {
+  // some reason there is padding on html default
+  padding: 0;
+  margin: 0;
   // min-height: 100vh;
   color: var(--white);
   background: var(--grey);

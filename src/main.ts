@@ -1,29 +1,22 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import Home from './pages/Home.vue';
-import Map from './pages/Map.vue';
-import Cameras from './pages/Cameras.vue';
+import CreateNode from './pages/CreateNode.vue';
+import CreatePublisher from './pages/CreatePublisher.vue';
 import { createMemoryHistory, createRouter } from 'vue-router';
-import DevTab from './pages/DevTab.vue';
-import Arm from './pages/Arm.vue';
-import Science from './pages/Science.vue';
-import Telemetry from './pages/Telemetry.vue';
-import Settings from './pages/Settings.vue';
-import Help from './pages/Help.vue';
+import CreateSubscriber from './pages/CreateSubscriber.vue';
 import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
+
 const routes = [
-  { path: '/', component: Home },
-  { path: '/Home', component: Home },
-  { path: '/Cameras', component: Cameras },
-  { path: '/Arm', component: Arm },
-  { path: '/Science', component: Science },
-  { path: '/Help', component: Help },
-  { path: '/Telemetry', component: Telemetry },
-  { path: '/Map', component: Map },
-  { path: '/Settings', component: Settings },
-  { path: '/Dev-tab', component: DevTab },
+  { path: '/', component: CreateNode },
+  { path: '/Task-1', component: CreateNode },
+  { path: '/Task-2', component: CreatePublisher },
+  { path: '/Task-3', component: CreateSubscriber },
+  // { path: '/Task#4', component: Science },
+  // { path: '/Task#5', component: Help },
+  // { path: '/Task#6', component: Telemetry },
+  // { path: '/Task#7', component: Map },
 ];
 
 const router = createRouter({
@@ -38,9 +31,6 @@ app.use(PrimeVue, {
   // Default theme configuration
   theme: {
     preset: Aura,
-    options: {
-      darkModeSelector: '.my-app-dark',
-    },
   },
 });
 app.use(pinia);

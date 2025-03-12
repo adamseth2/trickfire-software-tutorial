@@ -7,13 +7,14 @@ import RobotIndustrialIcon from 'vue-material-design-icons/RobotIndustrial.vue';
 import HelpCircleIcon from 'vue-material-design-icons/HelpCircle.vue';
 import FlaskIcon from 'vue-material-design-icons/Flask.vue';
 import HomeIcon from 'vue-material-design-icons/Home.vue';
-import CameraIcon from 'vue-material-design-icons/Camera.vue';
+import Check from 'vue-material-design-icons/Check.vue';
 import TuneIcon from 'vue-material-design-icons/Tune.vue';
 import BugIcon from 'vue-material-design-icons/Bug.vue';
 import PowerPlugIcon from 'vue-material-design-icons/PowerPlug.vue';
 import ControllerIcon from 'vue-material-design-icons/ControllerClassic.vue';
 import { useRoslibStore } from '@/store/roslibStore';
 import { useControllerStore } from '@/store/controllerStore';
+import { taskStore } from '@/store/taskStore';
 
 const roslib = useRoslibStore();
 const controller = useControllerStore();
@@ -22,65 +23,62 @@ const setCurrentTab = (newValue: number) => {
   currentTab.value = newValue;
 };
 
-type PageIcon = { icon: object; label: string; helperText: string }[];
+type PageIcon = { label: string; helperText: string }[];
 
 const pageIconArr: PageIcon = [
   {
-    icon: HomeIcon,
-    label: 'Home',
+    label: 'Task-1',
     helperText:
       'Show a couple of cameras, basic telemetry, auto/teleop button, reconnect canfd bus button, allow basic info about motors (like power consumption?), battery power level, LATER- shows box of the map',
   },
   {
-    icon: CameraIcon,
-    label: 'Cameras',
+    label: 'Task-2',
     helperText: 'Shows all the cameras, can select which cameras to show ',
   },
   {
-    icon: MapIcon,
-    label: 'Map',
+    label: 'Task-3',
     helperText: 'Display map where the rover is, the target and line the rover will take',
   },
   {
-    icon: RobotIndustrialIcon,
-    label: 'Arm',
+    label: 'Task-4',
     helperText:
       '3D model of the arm, camera arms, Any information related to the arm should be here',
   },
-  {
-    icon: FlaskIcon,
-    label: 'Science',
-    helperText: 'Anything related to life detection, science stuff should be here',
-  },
-  {
-    icon: HelpCircleIcon,
-    label: 'Help',
-    helperText: 'Layout of controls',
-  },
-  {
-    icon: InformationIcon,
-    label: 'Telemetry',
-    helperText:
-      'All information about rover like motor speed etc, position, potential record and export to csv',
-  },
-  {
-    icon: TuneIcon,
-    label: 'Settings',
-    helperText:
-      'any configuration like what input device (controller/keyboard) and change controller bindings',
-  },
-  {
-    icon: BugIcon,
-    label: 'Dev-Tab',
-    helperText: 'Experimental page to test modules',
-  },
+  // {
+  //   icon: FlaskIcon,
+  //   label: 'Science',
+  //   helperText: 'Anything related to life detection, science stuff should be here',
+  // },
+  // {
+  //   icon: HelpCircleIcon,
+  //   label: 'Help',
+  //   helperText: 'Layout of controls',
+  // },
+  // {
+  //   icon: InformationIcon,
+  //   label: 'Telemetry',
+  //   helperText:
+  //     'All information about rover like motor speed etc, position, potential record and export to csv',
+  // },
+  // {
+  //   icon: TuneIcon,
+  //   label: 'Settings',
+  //   helperText:
+  //     'any configuration like what input device (controller/keyboard) and change controller bindings',
+  // },
+  // {
+  //   icon: BugIcon,
+  //   label: 'Dev-Tab',
+  //   helperText: 'Experimental page to test modules',
+  // },
 ];
+const taskStoreData = taskStore();
 </script>
 <template>
   <nav>
     <section id="logo-section">
       <img id="logo" src="../assets/trickfire_logo_transparent.png" alt="Trickfire logo" />
-      <h1 id="logo-text">ST</h1>
+      <h1 id="logo-text">Trickfire ROS Tutorial</h1>
     </section>
     <section id="page-section">
       <RouterLink
@@ -92,7 +90,9 @@ const pageIconArr: PageIcon = [
         @click="setCurrentTab(index)"
       >
         <h4>{{ pageIcon.label }}</h4>
-        <component :is="pageIcon.icon" class="page-icon" :title="pageIcon.helperText" />
+        <!-- saves 24 px so that it aligns right -->
+        <Check v-if="taskStoreData.taskComplete.has(index)" />
+        <div v-else style="height: 24px"></div>
       </RouterLink>
     </section>
     <section id="states-section">
@@ -140,6 +140,29 @@ const pageIconArr: PageIcon = [
 </template>
 
 <style lang="scss" scoped>
+// Very bandage fix but because initially it was coded this way to reset styles. I put the reset one only here
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  &:visited {
+    color: inherit;
+  }
+}
+a {
+  color: inherit;
+}
+// default styles end here
+
 nav {
   grid-area: nav;
   display: flex;
