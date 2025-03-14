@@ -7,9 +7,11 @@ import CreateSubscriber from './pages/CreateSubscriber.vue';
 import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
+import SetupEnvironment from './pages/SetupEnvironment.vue';
 
 const routes = [
-  { path: '/', component: CreateNode },
+  { path: '/', component: SetupEnvironment },
+  { path: '/Task-0', component: SetupEnvironment },
   { path: '/Task-1', component: CreateNode },
   { path: '/Task-2', component: CreatePublisher },
   { path: '/Task-3', component: CreateSubscriber },

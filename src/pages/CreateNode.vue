@@ -13,21 +13,35 @@ import Checkbox from 'primevue/checkbox';
 import Button from 'primevue/button';
 
 // panel 2
-import ExampleComponent from '@/components/ExampleComponent.vue';
 import PublishTesterComponent from '@/components/PublishTesterComponent.vue';
 import { vConfetti } from '@neoconfetti/vue';
+import { taskStore } from '@/store/taskStore';
+import { useRouter } from 'vue-router';
+import NextTaskButton from '@/components/NextTaskButton.vue';
+const router = useRouter();
 
 onMounted(() => {
   console.log('hello world');
 });
+const task = taskStore();
+
+const checkIfTaskIsSuccessful = () => {
+  task.completeCurrTask();
+};
+const navigateToNextTask = () => {
+  const newTask = task.currTask + 1;
+  router.push(`/task-${newTask}`);
+};
 </script>
 <template>
   <div>
-    <Splitter style="width: 100%; height: calc(100vh - var(--nav-bar-size))">
-      <SplitterPanel :size="75" :minSize="10">
-        <ScrollPanel style="width: 100%; height: calc(100vh - var(--nav-bar-size))">
+    <Splitter class="splitter">
+      <SplitterPanel id="panel--left" :size="70" :minSize="10">
+        <ScrollPanel class="scroll-panel">
           <h1>Create a Simple ROS Node</h1>
-          <Fieldset style="margin: 2rem" legend="What is a ROS Node?">
+          <Divider />
+          <!-- Have to be in style css as setting it in a class does not work correctly:)))))))))👍 -->
+          <Fieldset class="fieldset" legend="What is a ROS Node?">
             <p class="m-0">
               <i
                 >"Each node in ROS should be responsible for a single, modular purpose, e.g.
@@ -53,18 +67,14 @@ onMounted(() => {
               >Source: Ros Documentation</a
             >
             <p>
-              TLDR: Each node purpose should be responsible to do one thing. (This is completely
-              unrelated to linked list nodes)
+              TLDR: Each node runs on its own thread and should be responsible to do one thing .
+              (This is completely unrelated to linked list nodes)
             </p>
           </Fieldset>
-          <div style="margin: 0 1rem 8rem 0">
+          <div id="instructionsGroup">
             <Panel header="Creating a Package" toggleable>
               <template #icons>
-                <!-- <span> -->
-                <Checkbox inputId="size_large" name="size" value="Large" size="large" />
-                <!-- <p>YOOO</p> -->
-                <!-- <p>hello</p> -->
-                <!-- </span> -->
+                <Checkbox class="checkbox" inputId="size_large" value="Large" size="large" />
               </template>
               <div>
                 <ol>
@@ -106,6 +116,9 @@ onMounted(() => {
               </div>
             </Panel>
             <Panel header="Writing a Basic Node to Say 'Hello World'" toggleable collapsed>
+              <template #icons>
+                <Checkbox class="checkbox" inputId="size_large" value="Large" size="large" />
+              </template>
               <div>
                 <ol>
                   <li>
@@ -151,6 +164,9 @@ def main(args: list[str] | None = None) -> None:
             </Panel>
 
             <Panel header="Adding to the List of Launch-able Nodes" toggleable collapsed>
+              <template #icons>
+                <Checkbox class="checkbox" inputId="size_large" value="Large" size="large" />
+              </template>
               <div>
                 <ol>
                   <li>
@@ -213,6 +229,9 @@ def generate_launch_description() -> launch.LaunchDescription:
             </Panel>
 
             <Panel header="Build and Execute Code" toggleable collapsed>
+              <template #icons>
+                <Checkbox class="checkbox" inputId="size_large" value="Large" size="large" />
+              </template>
               <div>
                 <ol>
                   <li>
@@ -233,20 +252,22 @@ def generate_launch_description() -> launch.LaunchDescription:
           </div>
         </ScrollPanel>
       </SplitterPanel>
-      <SplitterPanel :size="15" :minSize="10">
-        <!-- <ExampleComponent /> -->
-        <h1>C</h1>
-        <div v-confetti="{ duration: 1000 }" />
-        <PublishTesterComponent />
+      <SplitterPanel id="panel--right" :size="30" :minSize="10">
+        <ScrollPanel class="scroll-panel">
+          <h1>How To Complete Task</h1>
+          <Divider />
+          <p>Once it looks like this: (images of console) Click the button below</p>
+          <div style="display: flex; gap: 0.5rem">
+            <Button @click="checkIfTaskIsSuccessful">Submit</Button>
+            <div v-if="task.isCurrTaskComplete">
+              <div v-confetti="{ duration: 1000 }" />
+            </div>
+            <NextTaskButton />
+          </div>
+        </ScrollPanel>
       </SplitterPanel>
     </Splitter>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.center {
-  // flex-direction: row-column;
-  // display: grid;
-  // place-items: center;
-}
-</style>
+<style lang="scss" scoped></style>

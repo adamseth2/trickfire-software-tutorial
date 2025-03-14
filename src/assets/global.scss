@@ -49,6 +49,55 @@ body {
   -moz-osx-font-smoothing: grayscale;
   // height: 100%;
 }
+// TrickfireRos Tutorial
+// .fieldset {
+//   padding: 4rem;
+// }
+code {
+  white-space: pre-wrap; /* Preserves whitespace but allows wrapping */
+  word-wrap: break-word; /* Breaks long words to fit the container */
+  overflow-wrap: break-word; /* Ensures long words break to fit */
+  word-break: break-all; /* Optionally, breaks words at any character */
+}
+
+.splitter {
+  width: 100%;
+  height: calc(100vh - var(--nav-bar-size));
+  // padding: ;
+  // margin: 0;
+  .scroll-panel {
+    width: 100%;
+    height: calc(100vh - var(--nav-bar-size));
+    // point is for divider to not go to the end and for the scroll bar to not move when padding on right
+    padding-right: 1rem;
+  }
+  #panel {
+    // padding: 1rem;
+    padding: 1rem 0 6rem 1rem;
+    // padding-bottom: 6rem;
+
+    &--left {
+      @extend #panel;
+      #instructionsGroup {
+        margin: 0 1rem 8rem 0;
+        // TODO: Make this relative and not just manually eye ball centering
+        // Basically cannot figure how to align and when window small, the checkbox and the -+ gets on top of each other
+        .checkbox {
+          // margin-bottom: 0.45rem;
+          position: absolute;
+          right: 6rem;
+          margin-top: 0.5rem;
+        }
+      }
+      .fieldset {
+        margin: 1.5rem;
+      }
+    }
+    &--right {
+      @extend #panel;
+    }
+  }
+}
 
 // }
 // button {

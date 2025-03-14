@@ -30,7 +30,7 @@ const rosStore = roslibManager()
     <Splitter class="splitter">
       <SplitterPanel id="panel--left" :size="75" :minSize="10">
         <ScrollPanel class="scroll-panel">
-          <h1>Creating a Publisher</h1>
+          <h1>{Task Name}</h1>
           <Divider />
           <!-- Have to be in style css as setting it in a class does not work correctly:)))))))))👍 -->
           <Fieldset class="fieldset" legend="{Header}">

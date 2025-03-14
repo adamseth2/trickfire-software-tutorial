@@ -17,15 +17,20 @@ import { useControllerStore } from '@/store/controllerStore';
 import { taskStore } from '@/store/taskStore';
 
 const roslib = useRoslibStore();
+const taskStoreData = taskStore();
 const controller = useControllerStore();
-const currentTab = ref(0);
 const setCurrentTab = (newValue: number) => {
-  currentTab.value = newValue;
+  taskStoreData.currTask = newValue;
 };
 
 type PageIcon = { label: string; helperText: string }[];
 
 const pageIconArr: PageIcon = [
+  {
+    label: 'Task-0',
+    helperText:
+      'Show a couple of cameras, basic telemetry, auto/teleop button, reconnect canfd bus button, allow basic info about motors (like power consumption?), battery power level, LATER- shows box of the map',
+  },
   {
     label: 'Task-1',
     helperText:
@@ -72,7 +77,6 @@ const pageIconArr: PageIcon = [
   //   helperText: 'Experimental page to test modules',
   // },
 ];
-const taskStoreData = taskStore();
 </script>
 <template>
   <nav>
@@ -86,7 +90,7 @@ const taskStoreData = taskStore();
         :key="index"
         :to="pageIcon.label"
         class="container navbar-tab"
-        :class="{ 'current-page': currentTab === index }"
+        :class="{ 'current-page': taskStoreData.currTask === index }"
         @click="setCurrentTab(index)"
       >
         <h4>{{ pageIcon.label }}</h4>
@@ -107,7 +111,7 @@ const taskStoreData = taskStore();
           :class="{ green: roslib.isWebSocketConnected, red: !roslib.isWebSocketConnected }"
         />
       </div>
-      <div
+      <!-- <div
         class="container"
         :title="`Camera: ${roslib.isWebSocketConnected ? `Connected` : `Disconnected`}`"
       >
@@ -117,8 +121,8 @@ const taskStoreData = taskStore();
           class="page-icon"
           :class="{ green: roslib.isWebSocketConnected, red: !roslib.isWebSocketConnected }"
         />
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="container"
         :title="`Controller: ${controller.isGamepadConnected ? `Connected` : `Disconnected`}`"
       >
@@ -128,7 +132,7 @@ const taskStoreData = taskStore();
           class="page-icon"
           :class="{ green: controller.isGamepadConnected, red: !controller.isGamepadConnected }"
         />
-      </div>
+      </div> -->
       <div id="ping_container" class="container">
         <h4 id="status">Ping</h4>
         <h5>
