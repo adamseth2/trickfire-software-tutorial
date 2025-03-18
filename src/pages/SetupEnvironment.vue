@@ -43,7 +43,7 @@ watch(roslib.isWebSocketConnected, () => {
           </p>
           <!-- Have to be in style css as setting it in a class does not work correctly:)))))))))👍 -->
           <div id="instructionsGroup">
-            <Panel header="Reading the Software onboard Document" toggleable collapsed>
+            <Panel header="Reading the Software onboard Document" toggleable>
               <template #icons>
                 <Checkbox class="checkbox" inputId="size_large" value="Large" size="large" />
               </template>
@@ -69,7 +69,7 @@ watch(roslib.isWebSocketConnected, () => {
                 </p>
 
                 <p>
-                  This is one of the biggest hurdle for new members, so if you need help, feel free
+                  This is one of the biggest hurdles for new members, so if you need help, feel free
                   to ask another software member in the
                   <Tag>#general-software</Tag> discord channel.
                 </p>
